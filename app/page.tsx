@@ -1,19 +1,20 @@
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "./page.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
+  const [location, setLocation] = useState("");
   return (
     <main className="bg-gray-100 min-h-screen w-screen">
       <main className="max-w-screen-2xl m-auto bg-white">
         {/* NAVBAR */}
         <nav className="bg-white p-2 flex justify-between">
-          <a href="" className="font-bold text-gray-700 text-2xl">
+          <Link href="" className="font-bold text-gray-700 text-2xl">
             {" "}
             OpenTable{" "}
-          </a>
+          </Link>
           <div>
             <div className="flex">
               <button className="bg-blue-400 text-white border p-1 px-4 rounded mr-3">
@@ -37,8 +38,15 @@ export default function Home() {
                   className="rounded  mr-3 p-2 w-[450px]"
                   type="text"
                   placeholder="State, city or town"
+                  onChange={(e) => setLocation(e.target.value)}
+                  value={location}
                 />
-                <button className="rounded bg-red-600 px-9 py-2 text-white">
+                <button
+                  className="rounded bg-red-600 px-9 py-2 text-white"
+                  onClick={() => {
+                    if (location) router.push("/search");
+                  }}
+                >
                   Let's go
                 </button>
               </div>
@@ -46,7 +54,10 @@ export default function Home() {
             </div>
           </div>
           {/* HEADER */} {/* CARDS */}
-          <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
+          <Link
+            href="/restaurant/milestones"
+            className="py-3 px-36 mt-10 flex flex-wrap justify-center"
+          >
             {/* CARD */}
             <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer">
               <img
@@ -69,7 +80,7 @@ export default function Home() {
               </div>
             </div>
             {/* CARD */}
-          </div>
+          </Link>
           {/* CARDS */}
         </main>
       </main>
