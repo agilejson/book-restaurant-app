@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  // @id say that id is primary key and it will be unique
+  // @default(autoincrement()) will give us the default values and will be increment from the previous value
+  id          Int      @id @default(autoincrement())
+  name        String
+  main_img    String
+  description String
+  images      String[]
+  open_time   String
+  close_time  String
+  // @default(now()) will give the default value of when it is created
+  created_at  DateTime @default(now())
+  // @updateAt will automatically update the when we update 
+  updated_at  DateTime @updatedAt
+  // @unique says slug should be unique
+  slug        String   @unique
+  // price should be one the three value from PRICE
+  price       PRICE
+  // this say location_id will be the id of one of Location so it make the relation do note that we also have to set restaurant an array of Restaurant in order to make bond
+  location    Location @relation(fields: [location_id], references: [id])
+  location_id Int
+  cusion      Cuisine  @relation(fields: [cusion_id], references: [id])
+  cusion_id   Int
+  Item        Item[]
+}
+
+enum PRICE {
+  CHEAP
+  REGULAR
+  EXPENSIVE
+}
+
+model Item {
+  id            Int        @id @default(autoincrement())
+  name          String
+  price         String
+  description   String
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
+  restaurant_id Int
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
+}
+
+model Location {
+  id         Int          @id @default(autoincrement())
+  name       String
+  restaurant Restaurant[]
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+}
+
+model Cuisine {
+  id         Int          @id @default(autoincrement())
+  name       String
+  restaurant Restaurant[]
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+}
