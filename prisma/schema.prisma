@@ -22,7 +22,7 @@ model Restaurant {
   location_id Int
   cuisine_id  Int
   Item        Item[]
-  Cuisine     Cuisine  @relation(fields: [cuisine_id], references: [id], onUpdate: NoAction)
+  cuisine     Cuisine  @relation(fields: [cuisine_id], references: [id], onUpdate: NoAction)
   location    Location @relation(fields: [location_id], references: [id])
 }
 
