@@ -21,7 +21,7 @@ model Restaurant {
   price       PRICE
   location_id Int
   cuisine_id  Int
-  Item        Item[]
+  item        Item[]
   cuisine     Cuisine  @relation(fields: [cuisine_id], references: [id], onUpdate: NoAction)
   location    Location @relation(fields: [location_id], references: [id])
 }
