@@ -10,7 +10,7 @@ const fetchRestaurantMenu = async (slug: string) => {
       slug,
     },
     select: {
-      Item: true,
+      item: true,
     },
   });
 
@@ -18,7 +18,7 @@ const fetchRestaurantMenu = async (slug: string) => {
     throw new Error();
   }
 
-  return restaurant.Item;
+  return restaurant.item;
 };
 
 export default async function RestaurantMenu({

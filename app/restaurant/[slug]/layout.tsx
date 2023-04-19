@@ -7,7 +7,6 @@ const RestaurantLayout = ({
   children: React.ReactNode;
   params: { slug: string };
 }) => {
-  console.log(params);
   return (
     <>
       <Header name={params.slug} />
