@@ -34,8 +34,8 @@ const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
   return restaurant;
 };
 
-const RestaurantDetails = async (Props: any) => {
-  const slug = Props.params.slug;
+const RestaurantDetails = async ({ params }: any) => {
+  const slug = params.slug;
 
   const restaurant = await fetchRestaurant(slug);
   return (
