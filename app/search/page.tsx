@@ -3,6 +3,7 @@ import SearchSideBar from "./components/SearchSideBar";
 import RestaurantCard from "./components/RestaurantCard";
 import { Cuisine, Location, PRICE, PrismaClient } from "@prisma/client";
 
+// card that will be show on the search page
 export interface SearchRestaurantCardType {
   id: number;
   name: string;
@@ -13,11 +14,19 @@ export interface SearchRestaurantCardType {
   location: Location;
 }
 
+// type for the url query
+export interface SearchParamType {
+  city?: string;
+  cuisine?: string;
+  price?: PRICE;
+}
+
 const prisma = new PrismaClient();
 
-const fetchRestaurantByCity = (
-  city: string | undefined
+const fetchRestaurant = (
+  searchParams: SearchParamType
 ): Promise<SearchRestaurantCardType[]> => {
+  // these are the fields that we want
   const select = {
     id: true,
     name: true,
@@ -27,17 +36,48 @@ const fetchRestaurantByCity = (
     cuisine: true,
     location: true,
   };
-  // when user does not provide the city i.e. searched without city
-  if (!city) return prisma.restaurant.findMany({ select });
+
+  // type for the where parameter that we will use to get filtered data from the server
+  interface WhereType {
+    location?: {
+      name?: {
+        equals?: string;
+      };
+    };
+    cuisine?: {
+      name?: {
+        equals?: string;
+      };
+    };
+    price?: {
+      equals?: PRICE;
+    };
+  }
+  // create any empty where and later we will add parameter based on the url query
+  let where: WhereType = {};
+
+  if (searchParams.city) {
+    where.location = {
+      name: {
+        equals: searchParams.city.toLowerCase(),
+      },
+    };
+  }
+  if (searchParams.cuisine) {
+    where.cuisine = {
+      name: {
+        equals: searchParams.cuisine,
+      },
+    };
+  }
+  if (searchParams.price) {
+    where.price = {
+      equals: searchParams.price,
+    };
+  }
 
   return prisma.restaurant.findMany({
-    where: {
-      location: {
-        name: {
-          equals: city.toLowerCase(),
-        },
-      },
-    },
+    where,
     select,
   });
 };
@@ -52,12 +92,8 @@ const fetchCuisines = async (): Promise<Cuisine[]> => {
   return cuisines;
 };
 
-const Search = async ({
-  searchParams,
-}: {
-  searchParams: { city?: string; cuisine?: string; price: PRICE };
-}) => {
-  const restaurants = await fetchRestaurantByCity(searchParams.city);
+const Search = async ({ searchParams }: { searchParams: SearchParamType }) => {
+  const restaurants = await fetchRestaurant(searchParams);
   const locations = await fetchLocation();
   const cuisines = await fetchCuisines();
   return (
