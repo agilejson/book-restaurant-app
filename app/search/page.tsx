@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import SearchSideBar from "./components/SearchSideBar";
 import RestaurantCard from "./components/RestaurantCard";
-import { Cuisine, Location, PRICE, PrismaClient } from "@prisma/client";
+import { Cuisine, Location, PRICE, Review, PrismaClient } from "@prisma/client";
 
 // card that will be show on the search page
 export interface SearchRestaurantCardType {
@@ -12,6 +12,7 @@ export interface SearchRestaurantCardType {
   price: PRICE;
   cuisine: Cuisine;
   location: Location;
+  reviews: Review[];
 }
 
 // type for the url query
@@ -35,6 +36,7 @@ const fetchRestaurant = (
     price: true,
     cuisine: true,
     location: true,
+    reviews: true,
   };
 
   // type for the where parameter that we will use to get filtered data from the server
@@ -94,6 +96,7 @@ const fetchCuisines = async (): Promise<Cuisine[]> => {
 
 const Search = async ({ searchParams }: { searchParams: SearchParamType }) => {
   const restaurants = await fetchRestaurant(searchParams);
+  console.log(restaurants);
   const locations = await fetchLocation();
   const cuisines = await fetchCuisines();
   return (
