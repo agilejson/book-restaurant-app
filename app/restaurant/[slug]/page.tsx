@@ -5,22 +5,27 @@ import Description from "./components/Description";
 import Images from "./components/Images";
 import Reviews from "./components/Reviews";
 import ReservationCard from "./components/ReservationCard";
-import { Cuisine, PRICE, PrismaClient, Restaurant } from "@prisma/client";
+import {
+  Cuisine,
+  PRICE,
+  PrismaClient,
+  Restaurant,
+  Review,
+} from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export interface RestaurantType {
   id: number;
   name: string;
-  main_image: string;
-  cuisine: Cuisine;
-  location: Location;
-  price: PRICE;
+  images: string[];
+  description: string;
   slug: string;
+  reviews: Review[];
 }
 
-const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
-  const restaurant: Restaurant = await prisma.restaurant.findUnique({
+const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
+  const restaurant: RestaurantType = await prisma.restaurant.findUnique({
     where: { slug },
     select: {
       id: true,
@@ -28,6 +33,7 @@ const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
       images: true,
       description: true,
       slug: true,
+      reviews: true,
     },
   });
 
@@ -43,10 +49,11 @@ const RestaurantDetails = async ({ params }: any) => {
       <div className="bg-white w-[70%] rounded p-3 shadow">
         <RestaurantNavBar slug={restaurant.slug} />
         <Title name={restaurant.name} />
-        <Rating />
+        <Rating reviews={restaurant.reviews} />
         <Description description={restaurant.description} />
         <Images images={restaurant.images} />
-        <Reviews />
+
+        <Reviews reviews={restaurant.reviews} />
       </div>
       <div className="w-[27%] relative text-reg">
         <ReservationCard />
