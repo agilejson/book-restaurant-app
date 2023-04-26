@@ -1,16 +1,16 @@
-import { PrismaClient } from "@prisma/client";
+import { Item, PrismaClient } from "@prisma/client";
 import Menu from "../components/Menu";
 import RestaurantNavBar from "../components/RestaurantNavBar";
 
 const prisma = new PrismaClient();
 
-const fetchRestaurantMenu = async (slug: string) => {
+const fetchRestaurantMenu = async (slug: string): Promise<Item[]> => {
   const restaurant = await prisma.restaurant.findUnique({
     where: {
       slug,
     },
     select: {
-      item: true,
+      items: true,
     },
   });
 
@@ -18,7 +18,7 @@ const fetchRestaurantMenu = async (slug: string) => {
     throw new Error();
   }
 
-  return restaurant.item;
+  return restaurant.items;
 };
 
 export default async function RestaurantMenu({
