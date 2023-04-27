@@ -37,6 +37,10 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
     },
   });
 
+  if (!restaurant) {
+    throw new Error("Can't find restaurant!");
+  }
+
   return restaurant;
 };
 
