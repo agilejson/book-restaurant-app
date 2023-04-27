@@ -12,6 +12,7 @@ import {
   Restaurant,
   Review,
 } from "@prisma/client";
+import { notFound } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -38,7 +39,10 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
   });
 
   if (!restaurant) {
-    throw new Error("Can't find restaurant!");
+    // when we want to show error.tsx
+    // throw new Error("Can't find restaurant!");
+    // when we want to show not-found.tsx
+    notFound();
   }
 
   return restaurant;
