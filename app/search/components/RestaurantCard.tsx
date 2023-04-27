@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SearchRestaurantCardType } from "../page";
 import Price from "../../components/Price";
 import { calculateReviewsRatingAverage } from "../../../utils/calculateReviewsRatingAverage";
+import Stars from "../../components/Stars";
 
 const RestaurantCard = ({
   restaurant,
@@ -21,7 +22,9 @@ const RestaurantCard = ({
       <div className="pl-5">
         <h2 className="text-3xl">{restaurant.name}</h2>
         <div className="flex items-start">
-          <div className="flex mb-2">*****</div>
+          <div className="flex mb-2">
+            <Stars reviews={restaurant.reviews} />
+          </div>
           <p className="ml-2 text-sm">{renderRatingText()}</p>
         </div>
         <div className="mb-9">
