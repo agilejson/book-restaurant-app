@@ -96,7 +96,6 @@ const fetchCuisines = async (): Promise<Cuisine[]> => {
 
 const Search = async ({ searchParams }: { searchParams: SearchParamType }) => {
   const restaurants = await fetchRestaurant(searchParams);
-  console.log(restaurants);
   const locations = await fetchLocation();
   const cuisines = await fetchCuisines();
   return (

@@ -10,7 +10,7 @@ const Reviews = ({ reviews }: { reviews: Review[] }) => {
         } are saying`}
       </h1>
       {reviews.map((review) => (
-        <ReviewCard review={review} />
+        <ReviewCard review={review} key={review.id} />
       ))}
     </div>
   );

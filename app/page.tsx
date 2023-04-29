@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import RestaurantCard from "./components/RestaurantCard";
-import { PrismaClient, Cuisine, Location,Review, PRICE } from "@prisma/client";
+import { PrismaClient, Cuisine, Location, Review, PRICE } from "@prisma/client";
 
 // this will crete a new instance of prisma which will help us to reach out to db
 const prisma = new PrismaClient();
@@ -39,7 +39,7 @@ export default async function Home() {
       <Header />
       <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
         {restaurants.map((restaurant) => (
-          <RestaurantCard restaurant={restaurant} />
+          <RestaurantCard restaurant={restaurant} key={restaurant.id} />
         ))}
       </div>
     </main>
