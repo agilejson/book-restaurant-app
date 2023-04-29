@@ -96,6 +96,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       token,
     });
   }
+
+  // * IF REQUEST TYPE IS NOT POST
+
+  return res.status(404).json({
+    errorMessage: "Unknown Request Type!",
+  });
 }
 
 export default handler;
