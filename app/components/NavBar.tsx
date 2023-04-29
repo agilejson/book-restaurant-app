@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LoginModel from "./LoginModal";
+import AuthModel from "./AuthModal";
 const NavBar = () => {
   return (
     <nav className="bg-white p-2 flex justify-between">
@@ -9,8 +9,8 @@ const NavBar = () => {
       </Link>
       <div>
         <div className="flex">
-          <LoginModel isSignin={true} />
-          <LoginModel isSignin={false} />
+          <AuthModel isSignin={true} />
+          <AuthModel isSignin={false} />
         </div>
       </div>
     </nav>

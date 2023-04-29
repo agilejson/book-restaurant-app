@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import AuthModalInputs from "./AuthModalInputs";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -10,16 +10,16 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
-const LoginModel = ({ isSignin }: { isSignin: boolean }) => {
+const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // this function will just return the content based on if we have to signin content or not
   const renderContent = (signinContent: String, signupContent: String) => {
     return isSignin ? signinContent : signupContent;
   };
@@ -42,16 +42,24 @@ const LoginModel = ({ isSignin }: { isSignin: boolean }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <div className="p-2">
+            <div className="m-auto">
+              <h2 className="text-2xl font-light text-center">
+                {renderContent(
+                  "Log Into Your Account",
+                  "Create Your Tavolo Account"
+                )}
+              </h2>
+              <AuthModalInputs />
+              <button className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-grey-400">
+                {renderContent("Sign In", "Create Account")}
+              </button>
+            </div>
+          </div>
         </Box>
       </Modal>
     </div>
   );
 };
 
-export default LoginModel;
+export default AuthModel;
