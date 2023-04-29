@@ -14,14 +14,39 @@ const style = {
   p: 4,
 };
 
+export interface AuthInputType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  city: string;
+  password: string;
+}
+
 const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
 
   // this function will just return the content based on if we have to signin content or not
   const renderContent = (signinContent: String, signupContent: String) => {
     return isSignin ? signinContent : signupContent;
+  };
+
+  const [inputs, setInputs] = useState<AuthInputType>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    city: "",
+    password: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -50,7 +75,11 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
                   "Create Your Tavolo Account"
                 )}
               </h2>
-              <AuthModalInputs />
+              <AuthModalInputs
+                inputs={inputs}
+                handleChange={handleChange}
+                isSignin={isSignin}
+              />
               <button className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-grey-400">
                 {renderContent("Sign In", "Create Account")}
               </button>
