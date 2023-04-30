@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AuthModalInputs from "./AuthModalInputs";
@@ -49,6 +49,26 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
     });
   };
 
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    // if any of input filed is empty disable the submit button
+    if (isSignin) {
+      if (inputs.email && inputs.password) {
+        return setDisabled(false);
+      }
+    } else {
+      let isEmpty: boolean = false;
+      for (let input in inputs) {
+        if (!inputs[input]) {
+          isEmpty = true;
+        }
+      }
+      if (!isEmpty) return setDisabled(false);
+    }
+    setDisabled(true);
+  }, [inputs]);
+
   return (
     <div>
       <button
@@ -80,7 +100,10 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
                 handleChange={handleChange}
                 isSignin={isSignin}
               />
-              <button className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-grey-400">
+              <button
+                className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
+                disabled={disabled}
+              >
                 {renderContent("Sign In", "Create Account")}
               </button>
             </div>
