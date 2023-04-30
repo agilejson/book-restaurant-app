@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import * as jose from "jose";
 import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
@@ -9,25 +8,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     // * EXTRACT TOKEN FROM THE HEADER
     const bearerToken = req.headers["authorization"] as string;
-    // if token doesn't exists
-    if (!bearerToken) {
-      return res.status(401).json({
-        errorMessage: "Unauthorized Request!",
-      });
-    }
     // get token
     const token = bearerToken.split(" ")[1];
-
-    // * VERIFY TOKEN
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-
-    try {
-      await jose.jwtVerify(token, secret);
-    } catch (error) {
-      return res.status(401).json({
-        errorMessage: "Unauthorized Request - Invalid Token!",
-      });
-    }
 
     // * DECODE THE TOKEN
 
