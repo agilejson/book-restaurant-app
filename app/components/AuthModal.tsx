@@ -1,8 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AuthModalInputs from "./AuthModalInputs";
+import useAuth from "../../hooks/useAuth";
+import { AuthContext } from "../context/AuthContext";
+import { Alert } from "@mui/material";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -28,10 +31,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
 
-  // this function will just return the content based on if we have to signin content or not
-  const renderContent = (signinContent: String, signupContent: String) => {
-    return isSignin ? signinContent : signupContent;
-  };
+  const [disabled, setDisabled] = useState(true);
 
   const [inputs, setInputs] = useState<AuthInputType>({
     firstName: "",
@@ -49,7 +49,19 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
     });
   };
 
-  const [disabled, setDisabled] = useState(true);
+  const { signin } = useAuth();
+  const { data, error, loading } = useContext(AuthContext);
+
+  // this function will just return the content based on if we have to signin content or not
+  const renderContent = (signinContent: String, signupContent: String) => {
+    return isSignin ? signinContent : signupContent;
+  };
+
+  const submitHandler = () => {
+    if (isSignin) {
+      signin(inputs.email, inputs.password, handleClose);
+    }
+  };
 
   useEffect(() => {
     // if any of input filed is empty disable the submit button
@@ -80,6 +92,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
       >
         {renderContent("Sign in", "Sign out")}
       </button>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -99,12 +112,21 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
                 inputs={inputs}
                 handleChange={handleChange}
                 isSignin={isSignin}
+                loading={loading}
               />
+              {error && (
+                <Alert severity="error" className="my-2">
+                  {error}
+                </Alert>
+              )}
               <button
-                className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
+                className="uppercase bg-red-600 w-full h-10 text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
                 disabled={disabled}
+                onClick={submitHandler}
               >
-                {renderContent("Sign In", "Create Account")}
+                {loading
+                  ? renderContent("Signing In", "Creating Account")
+                  : renderContent("Sign In", "Create Account")}
               </button>
             </div>
           </div>
