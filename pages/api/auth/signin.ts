@@ -73,8 +73,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .setExpirationTime("24hr")
       .sign(secret);
 
-    // this will set cookie on the client side
-    setCookie("jwt", token, { req, res, maxAge: 60 * 6 * 24 });
+    // this will set cookie on the client side which will there for six days
+    setCookie("jwt", token, { req, res, maxAge: 60 * 24 * 6 });
 
     // * SEND JWT TO USER
 

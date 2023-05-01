@@ -49,7 +49,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
     });
   };
 
-  const { signin } = useAuth();
+  const { signin, signup } = useAuth();
   const { data, error, loading } = useContext(AuthContext);
 
   // this function will just return the content based on if we have to signin content or not
@@ -59,7 +59,9 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
 
   const submitHandler = () => {
     if (isSignin) {
-      signin(inputs.email, inputs.password, handleClose);
+      signin({ email: inputs.email, password: inputs.password }, handleClose);
+    } else {
+      signup({ ...inputs }, handleClose);
     }
   };
 

@@ -2,11 +2,26 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../app/context/AuthContext";
 
+interface signupDataType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  city: string;
+  password: string;
+}
+
 const useAuth = () => {
   const { data, error, loading, setAuthState } = useContext(AuthContext);
+
   const signin = async (
-    email: string,
-    password: string,
+    {
+      email,
+      password,
+    }: {
+      email: string;
+      password: string;
+    },
     handleClose: () => void
   ) => {
     setAuthState({
@@ -38,7 +53,37 @@ const useAuth = () => {
     }
   };
 
-  const signup = async () => {};
+  const signup = async (
+    signupData: signupDataType,
+    handleClose: () => void
+  ) => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: true,
+    });
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/signup",
+        {
+          ...signupData,
+        }
+      );
+      setAuthState({
+        data: response.data,
+        error: null,
+        loading: false,
+      });
+      handleClose();
+    } catch (error: any) {
+      console.log(error.response.data.errorMessage);
+      setAuthState({
+        data: null,
+        error: error.response.data.errorMessage,
+        loading: false,
+      });
+    }
+  };
 
   return {
     signin,
