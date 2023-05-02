@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../app/context/AuthContext";
+import { getCookie } from "cookies-next";
 
 interface signupDataType {
   firstName: string;
@@ -85,9 +86,53 @@ const useAuth = () => {
     }
   };
 
+  const fetchUser = async () => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: true,
+    });
+
+    try {
+      // get JWT from cookie
+      const jwt = getCookie("jwt");
+
+      if (!jwt) {
+        return setAuthState({
+          data: null,
+          error: null,
+          loading: false,
+        });
+      }
+
+      const response = await axios.get("http://localhost:3000/api/auth/me", {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      // send token for every request
+      axios.defaults.headers.common["authorization"] = `Bearer ${jwt}`;
+
+      return {
+        data: response.data,
+        error: "full",
+        loading: false,
+      };
+    } catch (error: any) {
+      console.log(error.data.response.errorMessage);
+      return {
+        data: null,
+        error: error.response.data.errorMessage,
+        loading: false,
+      };
+    }
+  };
+
   return {
     signin,
     signup,
+    fetchUser,
   };
 };
 

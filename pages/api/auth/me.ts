@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     // * EXTRACT TOKEN FROM THE HEADER
+    console.log("me on server");
     const bearerToken = req.headers["authorization"] as string;
     // get token
     const token = bearerToken.split(" ")[1];
@@ -55,7 +56,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     // * SEND USER TO CLIENT
 
     return res.status(200).json({
-      user,
+      id: user.id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      email: user.email,
+      phone: user.phone,
+      city: user.city,
     });
   }
   // * IF REQUEST TYPE IS NOT POST

@@ -1,5 +1,8 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { getCookie } from "cookies-next";
+import axios from "axios";
 
 interface User {
   id: number;
@@ -33,6 +36,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     data: null,
     error: null,
   });
+
+  const { fetchUser } = useAuth();
+
+  useEffect(() => {
+    const doFetch = async () => {
+      const response: any = await fetchUser();
+      setAuthState({ ...response });
+    };
+    doFetch();
+    fetchUser();
+  }, []);
   return (
     <AuthContext.Provider value={{ ...authState, setAuthState }}>
       {children}
