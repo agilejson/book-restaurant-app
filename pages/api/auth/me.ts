@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     // * EXTRACT TOKEN FROM THE HEADER
-    console.log("me on server");
     const bearerToken = req.headers["authorization"] as string;
     // get token
     const token = bearerToken.split(" ")[1];

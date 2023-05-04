@@ -32,7 +32,7 @@ export const AuthContext = createContext<AuthStateType>({
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [authState, setAuthState] = useState<StateType>({
-    loading: false,
+    loading: true,
     data: null,
     error: null,
   });
