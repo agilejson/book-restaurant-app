@@ -41,11 +41,15 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const doFetch = async () => {
+      setAuthState({
+        data: null,
+        error: null,
+        loading: true,
+      });
       const response: any = await fetchUser();
       setAuthState({ ...response });
     };
     doFetch();
-    fetchUser();
   }, []);
   return (
     <AuthContext.Provider value={{ ...authState, setAuthState }}>

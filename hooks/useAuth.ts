@@ -87,22 +87,16 @@ const useAuth = () => {
   };
 
   const fetchUser = async () => {
-    setAuthState({
-      data: null,
-      error: null,
-      loading: true,
-    });
-
     try {
       // get JWT from cookie
       const jwt = getCookie("jwt");
 
       if (!jwt) {
-        return setAuthState({
+        return {
           data: null,
           error: null,
           loading: false,
-        });
+        };
       }
 
       const response = await axios.get("http://localhost:3000/api/auth/me", {
