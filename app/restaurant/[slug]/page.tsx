@@ -67,10 +67,11 @@ const RestaurantDetails = async ({ params }: any) => {
 
         <Reviews reviews={restaurant.reviews} />
       </div>
-      <div className="w-[27%] relative text-reg">
+      <div className="w-[27%] sticky top-0 text-reg">
         <ReservationCard
           openTime={restaurant.open_time}
           closeTime={restaurant.close_time}
+          slug={slug}
         />
       </div>
     </>

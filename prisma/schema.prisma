@@ -32,7 +32,7 @@ model Restaurant {
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
   Booking    Booking[]
-  Table      Table[]
+  tables     Table[]
 }
 
 model Item {
@@ -116,9 +116,11 @@ model Table {
 
 model BookingsOnTables {
   booking_id Int
-  booking    Booking @relation(fields: [booking_id], references: [id])
+  booking    Booking  @relation(fields: [booking_id], references: [id])
   table_id   Int
-  table      Table   @relation(fields: [table_id], references: [id])
+  table      Table    @relation(fields: [table_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@id([booking_id, table_id])
 }
