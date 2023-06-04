@@ -5,8 +5,10 @@ import DatePicker from "react-datepicker";
 import useAvailabilities from "../../../../hooks/useAvailabilities";
 import { CircularProgress } from "@mui/material";
 import Link from "next/link";
-import { timeLog } from "console";
-import { convertToDisplayTime } from "../../../../utils/convertToDisplayTime";
+import {
+  Time,
+  convertToDisplayTime,
+} from "../../../../utils/convertToDisplayTime";
 
 const ReservationCard = ({
   openTime,
@@ -121,11 +123,11 @@ const ReservationCard = ({
             {data.map((time) => {
               return time.available ? (
                 <Link
-                  href={`/reserve/${slug}?date=${requiredDate}T${time}&partySize=${partySize}`}
+                  href={`/reserve/${slug}?date=${requiredDate.current}T${time.time}&partySize=${requiredPartySize}`}
                   className="bg-red-600 cursor-pointer p-2 w-24 text-center text-white mb-3 rounded mr-3"
                 >
                   <p className="text-sm font-bold">
-                    {convertToDisplayTime(time.time)}
+                    {convertToDisplayTime(time.time as Time)}
                   </p>
                 </Link>
               ) : (
