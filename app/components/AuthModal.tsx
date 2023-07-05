@@ -17,13 +17,14 @@ const style = {
   p: 4,
 };
 
-export interface AuthInputType {
+export interface AuthInputType extends Object {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   city: string;
   password: string;
+  [key: string]: any;
 }
 
 const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
@@ -73,6 +74,8 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
       }
     } else {
       let isEmpty: boolean = false;
+      // let input: string;
+      // let inputs: AuthModalInputs;
       for (let input in inputs) {
         if (!inputs[input]) {
           isEmpty = true;

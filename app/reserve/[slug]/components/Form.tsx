@@ -10,7 +10,7 @@ const Form = ({
 }: {
   slug: string;
   date: string;
-  partySize: number;
+  partySize: string;
 }) => {
   const [inputs, setInputs] = useState({
     bookerFirstName: "",
@@ -38,7 +38,7 @@ const Form = ({
   const handleClick = async () => {
     const booking = await createReservation({
       slug,
-      partySize,
+      partySize: Number(partySize),
       time,
       day,
       bookerFirstName: inputs.bookerFirstName,
