@@ -6,6 +6,7 @@ import AuthModalInputs from "./AuthModalInputs";
 import useAuth from "../../hooks/useAuth";
 import { AuthContext } from "../context/AuthContext";
 import { Alert } from "@mui/material";
+
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -51,16 +52,36 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
   };
 
   const { signin, signup } = useAuth();
-  const { data, error, loading } = useContext(AuthContext);
+  const { error, loading, setAuthState } = useContext(AuthContext);
 
   // this function will just return the content based on if we have to signin content or not
-  const renderContent = (signinContent: String, signupContent: String) => {
+  const renderContent = (
+    signinContent: string,
+    signupContent: string
+  ): string => {
     return isSignin ? signinContent : signupContent;
+  };
+
+  const handleSignin = async () => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: true,
+    });
+    const res = await signin({
+      email: inputs.email,
+      password: inputs.password,
+    });
+    setAuthState({ ...res });
+    if (res.error === null) {
+      console.log("entered");
+      handleClose();
+    }
   };
 
   const submitHandler = () => {
     if (isSignin) {
-      signin({ email: inputs.email, password: inputs.password }, handleClose);
+      handleSignin();
     } else {
       signup({ ...inputs }, handleClose);
     }
@@ -87,15 +108,9 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
   }, [inputs]);
 
   return (
-    <div>
-      <button
-        onClick={handleOpen}
-        className={`${renderContent(
-          "bg-blue-400 text-white",
-          ""
-        )} border p-1 px-4 rounded mr-3`}
-      >
-        {renderContent("Sign in", "Sign out")}
+    <div className="flex">
+      <button onClick={handleOpen} className="text-md p-1 px-4">
+        {renderContent("Sign in", "Sign up")}
       </button>
 
       <Modal

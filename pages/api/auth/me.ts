@@ -22,7 +22,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     // * FETCH USER FROM DB
-
     interface UserType {
       id: number;
       first_name: string;
