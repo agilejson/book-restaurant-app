@@ -109,7 +109,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
 
   return (
     <div className="flex">
-      <button onClick={handleOpen} className="text-md p-1 px-4">
+      <button onClick={handleOpen} className="text-md p-1 pl-4">
         {renderContent("Sign in", "Sign up")}
       </button>
 
@@ -120,7 +120,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="p-2">
+          <div>
             <div className="m-auto">
               <h2 className="text-2xl font-light text-center">
                 {renderContent(

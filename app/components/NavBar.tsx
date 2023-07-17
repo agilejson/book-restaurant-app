@@ -10,14 +10,18 @@ const NavBar = () => {
   const { signout } = useAuth();
 
   return (
-    <nav className="bg-white p-2 flex justify-between">
-      <Link href="" className="text-gray-700 text-3xl">
+    // <nav className="bg-gray-100 p-2 flex justify-between items-center backdrop-filter backdrop-blur-lg bg-opacity-30">
+    <nav className="p-2 flex justify-between items-center sticky top-0 z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30">
+      <Link
+        href=""
+        className="font-bold text-3xl font-mono text-red-500 hover:text-red-600 transition-all"
+      >
         Tavolo
       </Link>
       <div>
         <div className="flex">
           {data ? (
-            <button className="bg-white text-black px-4" onClick={signout}>
+            <button className="bg-white text-black" onClick={signout}>
               Sign Out
             </button>
           ) : (
