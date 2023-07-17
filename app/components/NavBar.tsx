@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
-  const { data, loading } = useContext(AuthContext);
+  const { data } = useContext(AuthContext);
   const { signout } = useAuth();
 
   return (

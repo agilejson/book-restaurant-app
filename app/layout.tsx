@@ -25,8 +25,8 @@ export default function RootLayout({
       */}
       <head />
       <body className={poppins.className}>
-        <main className="bg-gray-100 min-h-screen w-screen">
-          <main className="max-w-screen-2xl m-auto bg-white">
+        <main className="min-h-screen ">
+          <main className="max-w-8xl m-auto bg-gray-100 ">
             <AuthProvider>
               <NavBar />
               {children}
