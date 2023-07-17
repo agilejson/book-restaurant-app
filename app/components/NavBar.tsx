@@ -10,25 +10,23 @@ const NavBar = () => {
   const { signout } = useAuth();
 
   return (
-    <nav className="bg-white p-2 px-10 flex justify-between">
-      <Link href="" className=" text-gray-700 text-3xl">
+    <nav className="bg-white p-2 flex justify-between">
+      <Link href="" className="text-gray-700 text-3xl">
         Tavolo
       </Link>
-      <div className="flex">
-        {!loading && (
-          <div className="flex">
-            {data ? (
-              <button className="bg-white text-black px-4" onClick={signout}>
-                Sign Out
-              </button>
-            ) : (
-              <>
-                <AuthModel isSignin={true} />
-                <AuthModel isSignin={false} />
-              </>
-            )}
-          </div>
-        )}
+      <div>
+        <div className="flex">
+          {data ? (
+            <button className="bg-white text-black px-4" onClick={signout}>
+              Sign Out
+            </button>
+          ) : (
+            <>
+              <AuthModel isSignin={true} />
+              <AuthModel isSignin={false} />
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );
