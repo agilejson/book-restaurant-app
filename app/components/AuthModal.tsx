@@ -122,7 +122,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
         <Box sx={style}>
           <div>
             <div className="m-auto">
-              <h2 className="text-2xl font-light text-center">
+              <h2 className="text-2xl font-light text-center text-red-500 mb-5">
                 {renderContent(
                   "Log Into Your Account",
                   "Create Your Tavolo Account"
@@ -140,7 +140,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
                 </Alert>
               )}
               <button
-                className="uppercase bg-red-600 w-full h-10 text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
+                className="uppercase  bg-red-500 hover:bg-red-600 transition-all mt-3 w-full h-10 text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
                 disabled={disabled}
                 onClick={submitHandler}
               >
