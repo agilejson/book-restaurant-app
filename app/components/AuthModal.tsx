@@ -16,6 +16,7 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
+  background: "#f3f4f6",
 };
 
 export interface AuthInputType extends Object {
@@ -140,7 +141,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
                 </Alert>
               )}
               <button
-                className="uppercase  bg-red-500 hover:bg-red-600 transition-all mt-3 w-full h-10 text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
+                className="uppercase mb-3 bg-red-500 hover:bg-red-600 transition-all mt-3 w-full h-10 text-white p-3 disabled:bg-gray-400"
                 disabled={disabled}
                 onClick={submitHandler}
               >

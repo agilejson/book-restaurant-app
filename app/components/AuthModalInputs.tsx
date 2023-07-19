@@ -17,10 +17,10 @@ const AuthModalInputs = ({
     <div>
       <div>
         {isSignin ? null : (
-          <div className="my-2 flex justify-between text-sm">
+          <div className="my-2 flex justify-between">
             <input
               type="text"
-              className="border rounded p-2 py-3 disabled:bg-gray-100 w-[49%]"
+              className="border p-2 py-3 disabled:bg-gray-100 w-[49%]"
               placeholder="First Name"
               name="firstName"
               onChange={(e) => {
@@ -43,7 +43,7 @@ const AuthModalInputs = ({
             />
           </div>
         )}
-        <div className="my-2 flex justify-between text-sm">
+        <div className="my-2 flex justify-between">
           <input
             type="email"
             className="border rounded p-2 py-3 disabled:bg-gray-100 w-full"
@@ -57,7 +57,7 @@ const AuthModalInputs = ({
           />
         </div>
         {isSignin ? null : (
-          <div className="my-2 flex justify-between text-sm">
+          <div className="my-2 flex justify-between">
             <input
               type="text"
               className="border rounded p-2 py-3 disabled:bg-gray-100 w-[49%]"
@@ -84,7 +84,7 @@ const AuthModalInputs = ({
           </div>
         )}
 
-        <div className="my-2 flex justify-between text-sm">
+        <div className="my-2 flex justify-between">
           <input
             type="Password"
             className="border rounded p-2 py-3 disabled:bg-gray-100 w-full"
