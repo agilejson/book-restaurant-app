@@ -56,9 +56,9 @@ const ReservationCard = ({
   };
 
   return (
-    <div className="bg-white rounded p-3 shadow">
+    <div className="bg-white p-3 md:p-2 sm:p-0">
       <div className="text-center border-b pb-2 font-bold">
-        <h4 className="mr-7 text-lg">Make a Reservation</h4>
+        <h4 className="text-lg text-center">Make a Reservation</h4>
       </div>
       <div className="my-3 flex flex-col">
         <label htmlFor="">Party size</label>
@@ -102,7 +102,7 @@ const ReservationCard = ({
       </div>
       <div className="mt-5">
         <button
-          className="bg-red-600 rounded w-full px-4 text-white font-bold h-16"
+          className="bg-red-500 hover:bg-red-600 transition-all rounded w-full px-4 text-white font-bold h-16"
           onClick={() => {
             fetchAvailabilities({
               slug,
