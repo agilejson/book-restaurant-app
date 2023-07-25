@@ -16,7 +16,6 @@ const Header = ({
   partySize: string;
 }) => {
   const [day, time] = bookingDate.split("T");
-  console.log(day, time);
   return (
     <div className="">
       <h4 className="xsm:text-center">You're almost done!</h4>

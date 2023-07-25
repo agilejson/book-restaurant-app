@@ -3,6 +3,7 @@ import { SearchRestaurantCardType } from "../page";
 import Price from "../../components/Price";
 import { calculateReviewsRatingAverage } from "../../../utils/calculateReviewsRatingAverage";
 import Stars from "../../components/Stars";
+import { convertToDisplayTime } from "../../../utils/convertToDisplayTime";
 
 const RestaurantCard = ({
   restaurant,
@@ -17,26 +18,26 @@ const RestaurantCard = ({
     else return "";
   };
   return (
-    <div className="border-b flex pb-5">
-      <img src={restaurant.main_image} alt="" className="w-44 rounded" />
-      <div className="pl-5">
-        <h2 className="text-3xl">{restaurant.name}</h2>
-        <div className="flex items-start">
-          <div className="flex mb-2">
-            <Stars reviews={restaurant.reviews} />
-          </div>
-          <p className="ml-2 text-sm">{renderRatingText()}</p>
+    <div className="flex mb-5">
+      <img src={restaurant.main_image} alt="" className="w-44" />
+      <div className="p-1 pl-2 flex flex-col">
+        <h2 className="text-2xl">{restaurant.name}</h2>
+        <div className="flex mb-1">
+          <Stars reviews={restaurant.reviews} />
+          <p className="ml-2 text-md">{renderRatingText()}</p>
         </div>
-        <div className="mb-9">
-          <div className="font-light flex text-reg">
-            <p className="mr-4">
-              <Price price={restaurant.price} />
-            </p>
-            <p className="mr-4 capitalize">{restaurant.cuisine.name}</p>
-            <p className="mr-4 capitalize">{restaurant.location.name}</p>
-          </div>
+
+        <div className="font-light flex items-center text-reg">
+          <Price price={restaurant.price} />
+          <p className="mr-4 capitalize">{restaurant.cuisine.name}</p>
+          <p className="capitalize">{restaurant.location.name}</p>
         </div>
-        <div className="text-red-600">
+        <div className="pt-1">
+          <p>{`${convertToDisplayTime(
+            restaurant.open_time
+          )} - ${convertToDisplayTime(restaurant.close_time)}`}</p>
+        </div>
+        <div className="text-red-500">
           <Link href={`/restaurant/${restaurant.slug}`}>
             View more information
           </Link>

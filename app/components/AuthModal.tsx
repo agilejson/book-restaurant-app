@@ -75,7 +75,6 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
     });
     setAuthState({ ...res });
     if (res.error === null) {
-      console.log("entered");
       handleClose();
     }
   };

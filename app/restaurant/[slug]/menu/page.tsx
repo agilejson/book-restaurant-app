@@ -45,7 +45,6 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
 };
 
 const RestaurantMenu = async ({ params }: { params: { slug: string } }) => {
-  console.log(params);
   const slug = params.slug;
   const restaurant = await fetchRestaurant(slug);
 

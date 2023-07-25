@@ -1,7 +1,8 @@
-import Header from "./components/Header";
+import Header from "../components/Header";
 import SearchSideBar from "./components/SearchSideBar";
 import RestaurantCard from "./components/RestaurantCard";
 import { Cuisine, Location, PRICE, Review, PrismaClient } from "@prisma/client";
+import { Time } from "../../utils/convertToDisplayTime";
 
 // card that will be show on the search page
 export interface SearchRestaurantCardType {
@@ -13,6 +14,8 @@ export interface SearchRestaurantCardType {
   cuisine: Cuisine;
   location: Location;
   reviews: Review[];
+  open_time: Time;
+  close_time: Time;
 }
 
 // type for the url query
@@ -37,6 +40,8 @@ const fetchRestaurant = (
     cuisine: true,
     location: true,
     reviews: true,
+    open_time: true,
+    close_time: true,
   };
 
   // type for the where parameter that we will use to get filtered data from the server
