@@ -14,8 +14,8 @@ export interface SearchRestaurantCardType {
   cuisine: Cuisine;
   location: Location;
   reviews: Review[];
-  open_time: Time;
-  close_time: Time;
+  open_time: string;
+  close_time: string;
 }
 
 // type for the url query
@@ -27,7 +27,7 @@ export interface SearchParamType {
 
 const prisma = new PrismaClient();
 
-const fetchRestaurant = (
+const fetchRestaurant = async (
   searchParams: SearchParamType
 ): Promise<SearchRestaurantCardType[]> => {
   // these are the fields that we want
@@ -83,10 +83,12 @@ const fetchRestaurant = (
     };
   }
 
-  return prisma.restaurant.findMany({
+  const restaurant = await prisma.restaurant.findMany({
     where,
     select,
   });
+
+  return restaurant;
 };
 
 const fetchLocation = async (): Promise<Location[]> => {
@@ -106,13 +108,13 @@ const Search = async ({ searchParams }: { searchParams: SearchParamType }) => {
   return (
     <>
       <Header />
-      <div className="flex py-4 m-auto w-2/3 justify-between items-start">
+      <div className="py-4 w-fit xsm:w-full flex sm:flex-col mx-auto">
         <SearchSideBar
           locations={locations}
           cuisines={cuisines}
           searchParams={searchParams}
         />
-        <div className="w-5/6">
+        <div className="w-[26rem] xsm:w-[96%] xsm:mx-auto">
           {restaurants.length ? (
             restaurants.map((restaurant) => (
               <RestaurantCard restaurant={restaurant} key={restaurant.id} />

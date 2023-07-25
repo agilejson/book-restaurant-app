@@ -18,10 +18,10 @@ const RestaurantCard = ({
     else return "";
   };
   return (
-    <div className="flex mb-5">
-      <img src={restaurant.main_image} alt="" className="w-44" />
+    <div className="bg-white flex h-42 mb-3">
+      <img src={restaurant.main_image} alt="" className="w-44 xsm:w-36" />
       <div className="p-1 pl-2 flex flex-col">
-        <h2 className="text-2xl">{restaurant.name}</h2>
+        <h2 className="text-2xl xsm:text-[18px]">{restaurant.name}</h2>
         <div className="flex mb-1">
           <Stars reviews={restaurant.reviews} />
           <p className="ml-2 text-md">{renderRatingText()}</p>
