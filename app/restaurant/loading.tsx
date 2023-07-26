@@ -21,7 +21,7 @@ const Loading = () => {
               <p className="text-reg ml-3"></p>
             </div>
             <div>
-              <p className="text-reg ml-1 ml-4"> </p>
+              <p className="text-reg ml-4"> </p>
             </div>
           </div>
         </div>

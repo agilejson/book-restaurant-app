@@ -3,7 +3,10 @@ import { SearchRestaurantCardType } from "../page";
 import Price from "../../components/Price";
 import { calculateReviewsRatingAverage } from "../../../utils/calculateReviewsRatingAverage";
 import Stars from "../../components/Stars";
-import { convertToDisplayTime } from "../../../utils/convertToDisplayTime";
+import {
+  Time,
+  convertToDisplayTime,
+} from "../../../utils/convertToDisplayTime";
 
 const RestaurantCard = ({
   restaurant,
@@ -34,8 +37,8 @@ const RestaurantCard = ({
         </div>
         <div className="pt-1">
           <p>{`${convertToDisplayTime(
-            restaurant.open_time
-          )} - ${convertToDisplayTime(restaurant.close_time)}`}</p>
+            restaurant.open_time as Time
+          )} - ${convertToDisplayTime(restaurant.close_time as Time)}`}</p>
         </div>
         <div className="text-red-500">
           <Link href={`/restaurant/${restaurant.slug}`}>
