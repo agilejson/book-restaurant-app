@@ -18,7 +18,7 @@ const Header = ({
   const [day, time] = bookingDate.split("T");
   return (
     <div className="">
-      <h4 className="xsm:text-center">You're almost done!</h4>
+      <h4 className="text-red-500 xsm:text-center">You're almost done!</h4>
       <div className="mt-5 flex sm:flex-col ">
         <img
           src={mainImage}
