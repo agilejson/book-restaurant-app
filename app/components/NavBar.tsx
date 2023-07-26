@@ -21,7 +21,7 @@ const NavBar = () => {
       <div>
         <div className="flex">
           {data ? (
-            <button className="bg-white text-black" onClick={signout}>
+            <button className="text-md p-1 pl-4" onClick={signout}>
               Sign Out
             </button>
           ) : (
