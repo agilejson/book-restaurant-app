@@ -83,6 +83,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
     if (isSignin) {
       handleSignin();
     } else {
+      // ! NEED TO IMPLEMENT LIKE SIGN IN
       signup({ ...inputs }, handleClose);
     }
   };
@@ -140,7 +141,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
                 </Alert>
               )}
               <button
-                className="uppercase mb-3 bg-red-500 hover:bg-red-600 transition-all mt-3 w-full h-10 text-white p-3 disabled:bg-gray-400"
+                className="mb-3 bg-red-500 hover:bg-red-600 transition-all mt-3 w-full p-3 text-white disabled:bg-gray-400"
                 disabled={disabled}
                 onClick={submitHandler}
               >
