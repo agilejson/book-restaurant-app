@@ -528,7 +528,7 @@ export default async function handler(
     restaurants.find((restaurant) => restaurant.name === "Vivaan - fine Indian")
       ?.id || 1;
   const RamaKrishnaId =
-    restaurants.find((restaurant) => restaurant.name === "RamaKrishna Indian")
+    restaurants.find((restaurant) => restaurant.name === "Rama Krishna Indian")
       ?.id || 1;
   const coconutLagoonId =
     restaurants.find((restaurant) => restaurant.name === "Coconut Lagoon")
@@ -567,8 +567,28 @@ export default async function handler(
       ?.id || 1;
   const stelvioId =
     restaurants.find((restaurant) => restaurant.name === "Stelvio")?.id || 1;
+
   const sofiaId =
     restaurants.find((restaurant) => restaurant.name === "Sofia")?.id || 1;
+  const casaMaderaId =
+    restaurants.find((restaurant) => restaurant.name === "Casa Madera")?.id ||
+    1;
+  const tacoNTequilaId =
+    restaurants.find((restaurant) => restaurant.name === "Taco N Tequila")
+      ?.id || 1;
+  const elJefeId =
+    restaurants.find((restaurant) => restaurant.name === "El Jefe")?.id || 1;
+  const terroniAdelaideId =
+    restaurants.find((restaurant) => restaurant.name === "Terroni Adelaide")
+      ?.id || 1;
+  const estRestaurantId =
+    restaurants.find((restaurant) => restaurant.name === "EST Restaurant")
+      ?.id || 1;
+  const terroniSudFornoId =
+    restaurants.find((restaurant) => restaurant.name === "Terroni Sud Forno")
+      ?.id || 1;
+  const ilPadrinoId =
+    restaurants.find((restaurant) => restaurant.name === "il Padrino")?.id || 1;
 
   await prisma.item.createMany({
     data: [
@@ -1520,6 +1540,90 @@ export default async function handler(
       },
       {
         restaurant_id: sofiaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: casaMaderaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: casaMaderaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: casaMaderaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: tacoNTequilaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: tacoNTequilaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: tacoNTequilaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: elJefeId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elJefeId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elJefeId,
+        seats: 2,
+      },
+      {
+        restaurant_id: terroniAdelaideId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniAdelaideId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniAdelaideId,
+        seats: 2,
+      },
+      {
+        restaurant_id: estRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: estRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: estRestaurantId,
+        seats: 2,
+      },
+      {
+        restaurant_id: terroniSudFornoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniSudFornoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniSudFornoId,
+        seats: 2,
+      },
+      {
+        restaurant_id: ilPadrinoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: ilPadrinoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: ilPadrinoId,
         seats: 2,
       },
     ],
