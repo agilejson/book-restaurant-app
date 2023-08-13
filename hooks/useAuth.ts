@@ -23,13 +23,10 @@ const useAuth = () => {
     password: string;
   }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/signin",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("/api/auth/signin", {
+        email,
+        password,
+      });
       return {
         data: response.data,
         error: null,
@@ -55,12 +52,9 @@ const useAuth = () => {
       loading: true,
     });
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/signup",
-        {
-          ...signupData,
-        }
-      );
+      const response = await axios.post("/api/auth/signup", {
+        ...signupData,
+      });
       setAuthState({
         data: response.data,
         error: null,
