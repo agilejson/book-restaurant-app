@@ -128,11 +128,11 @@ const Form = ({
           </div>
           <button
             disabled={disabled || loading}
-            className="bg-red-500 hover:bg-red-600 w-full sm:w-[100%]  mt-2 p-3 text-white disabled:bg-gray-300"
+            className="bg-red-500 hover:bg-red-600 w-full sm:w-[100%]  mt-2 p-3 text-white disabled:bg-gray-300 flex items-center justify-center"
             onClick={handleClick}
           >
             {loading ? (
-              <CircularProgress color="inherit" />
+              <CircularProgress color="inherit" size={24} />
             ) : (
               "Complete reservation"
             )}
