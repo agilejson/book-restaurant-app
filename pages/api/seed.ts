@@ -23,9 +23,12 @@ export default async function handler(
     data: [{ name: "ottawa" }, { name: "toronto" }, { name: "niagara" }],
   });
 
+  console.log("Location");
+
   await prisma.cuisine.createMany({
     data: [{ name: "indian" }, { name: "italian" }, { name: "mexican" }],
   });
+  console.log("Cuisine");
 
   const locations = await prisma.location.findMany();
   const cuisines = await prisma.cuisine.findMany();
@@ -516,6 +519,8 @@ export default async function handler(
       },
     ],
   });
+
+  console.log("Restaurant");
 
   const restaurants = await prisma.restaurant.findMany();
 
@@ -1040,6 +1045,8 @@ export default async function handler(
     ],
   });
 
+  console.log("Item");
+
   const userLaith = await prisma.user.create({
     data: {
       first_name: "Laith",
@@ -1083,6 +1090,8 @@ export default async function handler(
       phone: "1112223333",
     },
   });
+
+  console.log("User");
 
   await prisma.review.createMany({
     data: [
@@ -1305,6 +1314,8 @@ export default async function handler(
     ],
   });
 
+  console.log("Reviews");
+
   await prisma.table.createMany({
     data: [
       {
@@ -1321,6 +1332,8 @@ export default async function handler(
       },
     ],
   });
+
+  console.log("Tables");
 
   res.status(200).json({ name: "hello" });
 }

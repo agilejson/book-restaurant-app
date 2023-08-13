@@ -43,7 +43,7 @@ const findAvailableTables = async ({
 
   const bookingTableObj: { [key: string]: { [key: number]: true } } = {};
 
-  // format booking something like this: {date: {[table_id]: true}}
+  // format booking something like this: {date: [{[table_id]: true}]}
   bookings.forEach((booking) => {
     bookingTableObj[booking.booking_time.toISOString()] = booking.tables.reduce(
       (obj, table) => ({
@@ -54,9 +54,10 @@ const findAvailableTables = async ({
     );
   });
 
+  // list of all the restaurant
   const tables = restaurant.tables;
 
-  // reformatting the search time
+  // since we are suppose to return list of time with the date, time and tables so we will create an array of which would look something like { date, time, tables } and then use will just use bookingTableObj(which has data for booking to filter out tables which is already booked and send out rest of tables
   const searchTimesWithTables = searchTimes.map((searchTime) => {
     return {
       date: new Date(`${day}T${searchTime}`),

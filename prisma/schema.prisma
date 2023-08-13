@@ -24,7 +24,7 @@ model Restaurant {
   location_id Int
   location    Location @relation(fields: [location_id], references: [id])
   cuisine_id  Int
-  // this will make realion between Cuisine's id to the cuisine_id and we will access the cuisine by restarunat.cuisine and cuisine_id is foerign key here
+  // this will make relation between Cuisine's id to the cuisine_id and we will access the cuisine by restarunat.cuisine and cuisine_id is foerign key here
 
   cuisine Cuisine  @relation(fields: [cuisine_id], references: [id])
   reviews Review[]
