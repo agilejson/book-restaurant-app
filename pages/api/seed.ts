@@ -167,7 +167,7 @@ export default async function handler(
       {
         name: "Utsav",
         main_image:
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/26646742.jpg",
+          "https://resizer.otstatic.com/v2/photos/xlarge/1/26646761.jpg",
         price: PRICE.CHEAP,
         description:
           "Utsav is an ancient Sanskrit word meaning festival. An integral part of Indian culture, Indian festivals are innumerable and equally varied in origin from the Himalayan foothills to the Peninsula's tip and food plays a very prominent part of the festive events.",
@@ -520,7 +520,7 @@ export default async function handler(
     ],
   });
 
-  console.log("Restaurant");
+  console.log("Restaurants");
 
   const restaurants = await prisma.restaurant.findMany();
 
@@ -1045,7 +1045,7 @@ export default async function handler(
     ],
   });
 
-  console.log("Item");
+  console.log("Items");
 
   const userLaith = await prisma.user.create({
     data: {
@@ -1091,7 +1091,7 @@ export default async function handler(
     },
   });
 
-  console.log("User");
+  console.log("Users");
 
   await prisma.review.createMany({
     data: [
@@ -1328,6 +1328,198 @@ export default async function handler(
       },
       {
         restaurant_id: vivaanId,
+        seats: 2,
+      },
+      {
+        restaurant_id: RamaKrishnaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: RamaKrishnaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: RamaKrishnaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: coconutLagoonId,
+        seats: 4,
+      },
+      {
+        restaurant_id: coconutLagoonId,
+        seats: 4,
+      },
+      {
+        restaurant_id: coconutLagoonId,
+        seats: 2,
+      },
+      {
+        restaurant_id: lastTrainToDelhiId,
+        seats: 4,
+      },
+      {
+        restaurant_id: lastTrainToDelhiId,
+        seats: 4,
+      },
+      {
+        restaurant_id: lastTrainToDelhiId,
+        seats: 2,
+      },
+      {
+        restaurant_id: adrakYorkvilleId,
+        seats: 4,
+      },
+      {
+        restaurant_id: adrakYorkvilleId,
+        seats: 4,
+      },
+      {
+        restaurant_id: adrakYorkvilleId,
+        seats: 2,
+      },
+      {
+        restaurant_id: curryishTavernId,
+        seats: 4,
+      },
+      {
+        restaurant_id: curryishTavernId,
+        seats: 4,
+      },
+      {
+        restaurant_id: curryishTavernId,
+        seats: 2,
+      },
+      {
+        restaurant_id: utsavId,
+        seats: 4,
+      },
+      {
+        restaurant_id: utsavId,
+        seats: 4,
+      },
+      {
+        restaurant_id: utsavId,
+        seats: 2,
+      },
+      {
+        restaurant_id: pukkaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: pukkaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: pukkaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: kamasutraIndianId,
+        seats: 4,
+      },
+      {
+        restaurant_id: kamasutraIndianId,
+        seats: 4,
+      },
+      {
+        restaurant_id: kamasutraIndianId,
+        seats: 2,
+      },
+      {
+        restaurant_id: eldoradoTacoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: eldoradoTacoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: eldoradoTacoId,
+        seats: 2,
+      },
+      {
+        restaurant_id: laBartolaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: laBartolaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: laBartolaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: elCatrinId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elCatrinId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elCatrinId,
+        seats: 2,
+      },
+      {
+        restaurant_id: mariachisId,
+        seats: 4,
+      },
+      {
+        restaurant_id: mariachisId,
+        seats: 4,
+      },
+      {
+        restaurant_id: mariachisId,
+        seats: 2,
+      },
+      {
+        restaurant_id: canoRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: canoRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: canoRestaurantId,
+        seats: 2,
+      },
+      {
+        restaurant_id: bluRistoranteId,
+        seats: 4,
+      },
+      {
+        restaurant_id: bluRistoranteId,
+        seats: 4,
+      },
+      {
+        restaurant_id: bluRistoranteId,
+        seats: 2,
+      },
+      {
+        restaurant_id: stelvioId,
+        seats: 4,
+      },
+      {
+        restaurant_id: stelvioId,
+        seats: 4,
+      },
+      {
+        restaurant_id: stelvioId,
+        seats: 2,
+      },
+      {
+        restaurant_id: sofiaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: sofiaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: sofiaId,
         seats: 2,
       },
     ],
