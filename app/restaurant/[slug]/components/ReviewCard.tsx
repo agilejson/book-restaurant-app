@@ -4,8 +4,8 @@ import Stars from "../../../components/Stars";
 const ReviewCard = ({ review }: { review: Review }) => {
   return (
     <div>
-      <div className="border-b pb-7 mb-7">
-        <div className="flex">
+      <div className="border-b pb-2 mb-4">
+        <div className="flex items-center">
           <div className="w-1/6 flex flex-col items-center">
             <div className="rounded-full bg-blue-400 w-16 h-16 flex items-center justify-center">
               <h2 className="text-white text-2xl">{`${review.first_name[0]} ${review.last_name[0]}`}</h2>

@@ -62,7 +62,7 @@ const RestaurantDetails = async ({ params }: any) => {
     <>
       <Header name={restaurant.slug} mainImage={restaurant.main_image} />
       <div className="flex m-auto w-2/3 xl:w-4/5 md:w-[100%] sm:w[98%] md:p-2 justify-between -mt-11">
-        <div className="bg-white w-[70%] sm:w-[100%] p-3">
+        <div className="z-10 bg-white w-[70%] sm:w-[100%] p-3 ">
           <RestaurantNavBar slug={restaurant.slug} />
           <Rating reviews={restaurant.reviews} />
           <Description description={restaurant.description} />
