@@ -19,7 +19,7 @@ const ReservationCard = ({
   closeTime: string;
   slug: string;
 }) => {
-  const { data, loading, error, fetchAvailabilities } = useAvailabilities();
+  const { data, loading, fetchAvailabilities } = useAvailabilities();
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [requiredPartySize, setRequiredPartySize] = useState<number>(1);
@@ -56,15 +56,15 @@ const ReservationCard = ({
   };
 
   return (
-    <div className="bg-white rounded p-3 shadow">
+    <div className="bg-white p-3 md:p-2 sm:p-0">
       <div className="text-center border-b pb-2 font-bold">
-        <h4 className="mr-7 text-lg">Make a Reservation</h4>
+        <h4 className="text-lg text-center">Make a Reservation</h4>
       </div>
       <div className="my-3 flex flex-col">
         <label htmlFor="">Party size</label>
         <select
           name=""
-          className="py-3 border-b font-light"
+          className="py-2 border-b font-light"
           id=""
           onChange={(e: any) => setRequiredPartySize(e.target.value)}
           value={requiredPartySize}
@@ -80,7 +80,7 @@ const ReservationCard = ({
           <DatePicker
             selected={selectedDate}
             onChange={handleChangeDate}
-            className="py-3 border-b font-light text-reg w-20"
+            className="py-2 border-b font-light text-reg w-20"
             dateFormat="MMMM d"
             wrapperClassName="w-[48%]"
           />
@@ -90,7 +90,7 @@ const ReservationCard = ({
           <select
             name=""
             id=""
-            className="py-3 border-b font-light"
+            className="py-2 border-b font-light"
             value={requiredTime}
             onChange={(e) => setRequiredTime(e.target.value)}
           >
@@ -102,7 +102,7 @@ const ReservationCard = ({
       </div>
       <div className="mt-5">
         <button
-          className="bg-red-600 rounded w-full px-4 text-white font-bold h-16"
+          className="bg-red-500 hover:bg-red-600 transition-all w-full px-4 text-white h-12 flex items-center justify-center"
           onClick={() => {
             fetchAvailabilities({
               slug,
@@ -113,25 +113,31 @@ const ReservationCard = ({
           }}
           disabled={loading}
         >
-          {loading ? <CircularProgress color="inherit" /> : "Find a Time"}
+          {loading ? (
+            <CircularProgress color="inherit" size={30} />
+          ) : (
+            "Find a Time"
+          )}
         </button>
       </div>
       {data && Date.length ? (
         <div className="mt-4">
           <p className="text-reg">Select Time</p>
-          <div className="flex flex-wrap mt-2">
+          <div className="flex flex-wrap justify-between mt-2">
             {data.map((time) => {
               return time.available ? (
                 <Link
                   href={`/reserve/${slug}?date=${requiredDate.current}T${time.time}&partySize=${requiredPartySize}`}
-                  className="bg-red-600 cursor-pointer p-2 w-24 text-center text-white mb-3 rounded mr-3"
+                  className="bg-red-500 hover:bg-red-600 transition-all cursor-pointer p-2 w-24 lg:w-20 text-center text-white mb-2"
                 >
-                  <p className="text-sm font-bold">
+                  <p className="text-sm text-center">
                     {convertToDisplayTime(time.time as Time)}
                   </p>
                 </Link>
               ) : (
-                <p className="bg-gray-300 p-2 w-24 mb-3 rounded mr-3">x</p>
+                <p className="bg-gray-300 text-white p-2 w-24 lg:w-20 mb-2 text-sm text-center">
+                  {convertToDisplayTime(time.time as Time)}
+                </p>
               );
             })}
           </div>

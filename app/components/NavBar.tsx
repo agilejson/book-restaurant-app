@@ -4,33 +4,33 @@ import AuthModel from "./AuthModal";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import useAuth from "../../hooks/useAuth";
+
 const NavBar = () => {
-  const { data, loading } = useContext(AuthContext);
+  const { data } = useContext(AuthContext);
   const { signout } = useAuth();
 
   return (
-    <nav className="bg-white p-2 flex justify-between">
-      <Link href="" className="font-bold text-gray-700 text-2xl">
+    // <nav className="bg-gray-100 p-2 flex justify-between items-center backdrop-filter backdrop-blur-lg bg-opacity-30">
+    <nav className="p-2 flex justify-between items-center sticky top-0 z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30">
+      <Link
+        href=""
+        className="font-bold text-3xl font-mono text-red-500 hover:text-red-600 transition-all"
+      >
         Tavolo
       </Link>
       <div>
-        {!loading && (
-          <div className="flex">
-            {data ? (
-              <button
-                className="bg-blue-400 text-white border p-1 px-4 rounded mr-3"
-                onClick={signout}
-              >
-                Sign Out
-              </button>
-            ) : (
-              <>
-                <AuthModel isSignin={true} />
-                <AuthModel isSignin={false} />
-              </>
-            )}
-          </div>
-        )}
+        <div className="flex">
+          {data ? (
+            <button className="text-md p-1 pl-4" onClick={signout}>
+              Sign Out
+            </button>
+          ) : (
+            <>
+              <AuthModel isSignin={true} />
+              <AuthModel isSignin={false} />
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );

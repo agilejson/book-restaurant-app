@@ -78,7 +78,11 @@ export default async function handler(
     }
 
     // make an object which has property as number of seats and array which contains id for that number of seats
-    const tablesCount: { 2: number[]; 4: number[] } = { 2: [], 4: [] };
+    const tablesCount: { 2: number[]; 4: number[]; [key: number]: any } = {
+      2: [],
+      4: [],
+    };
+
     searchTimeWithTables.tables.forEach((t) => tablesCount[t.seats].push(t.id));
 
     // assign table for a specific partySize

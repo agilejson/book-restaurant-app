@@ -1,5 +1,4 @@
 import RestaurantNavBar from "./components/RestaurantNavBar";
-import Title from "./components/Title";
 import Rating from "./components/Rating";
 import Description from "./components/Description";
 import Images from "./components/Images";
@@ -13,12 +12,14 @@ import {
   Review,
 } from "@prisma/client";
 import { notFound } from "next/navigation";
+import Header from "./components/Header";
 
 const prisma = new PrismaClient();
 
 export interface RestaurantType {
   id: number;
   name: string;
+  main_image: string;
   images: string[];
   description: string;
   slug: string;
@@ -33,6 +34,7 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
     select: {
       id: true,
       name: true,
+      main_image: true,
       images: true,
       description: true,
       slug: true,
@@ -58,21 +60,30 @@ const RestaurantDetails = async ({ params }: any) => {
   const restaurant = await fetchRestaurant(slug);
   return (
     <>
-      <div className="bg-white w-[70%] rounded p-3 shadow">
-        <RestaurantNavBar slug={restaurant.slug} />
-        <Title name={restaurant.name} />
-        <Rating reviews={restaurant.reviews} />
-        <Description description={restaurant.description} />
-        <Images images={restaurant.images} />
+      <Header name={restaurant.slug} mainImage={restaurant.main_image} />
+      <div className="flex m-auto w-2/3 xl:w-4/5 md:w-[100%] sm:w[98%] md:p-2 justify-between -mt-11">
+        <div className="z-10 bg-white w-[70%] sm:w-[100%] p-3 ">
+          <RestaurantNavBar slug={restaurant.slug} />
+          <Rating reviews={restaurant.reviews} />
+          <Description description={restaurant.description} />
+          <div className="hidden sm:block">
+            <ReservationCard
+              openTime={restaurant.open_time}
+              closeTime={restaurant.close_time}
+              slug={slug}
+            />
+          </div>
+          <Images images={restaurant.images} />
 
-        <Reviews reviews={restaurant.reviews} />
-      </div>
-      <div className="w-[27%] sticky top-0 text-reg">
-        <ReservationCard
-          openTime={restaurant.open_time}
-          closeTime={restaurant.close_time}
-          slug={slug}
-        />
+          <Reviews reviews={restaurant.reviews} />
+        </div>
+        <div className="w-[27%] md:w-[29%] sticky top-0 text-reg sm:hidden">
+          <ReservationCard
+            openTime={restaurant.open_time}
+            closeTime={restaurant.close_time}
+            slug={slug}
+          />
+        </div>
       </div>
     </>
   );

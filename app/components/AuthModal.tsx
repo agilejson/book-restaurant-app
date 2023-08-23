@@ -6,6 +6,7 @@ import AuthModalInputs from "./AuthModalInputs";
 import useAuth from "../../hooks/useAuth";
 import { AuthContext } from "../context/AuthContext";
 import { Alert } from "@mui/material";
+
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -15,15 +16,17 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
+  background: "#f3f4f6",
 };
 
-export interface AuthInputType {
+export interface AuthInputType extends Object {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   city: string;
   password: string;
+  [key: string]: any;
 }
 
 const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
@@ -50,17 +53,37 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
   };
 
   const { signin, signup } = useAuth();
-  const { data, error, loading } = useContext(AuthContext);
+  const { error, loading, setAuthState } = useContext(AuthContext);
 
   // this function will just return the content based on if we have to signin content or not
-  const renderContent = (signinContent: String, signupContent: String) => {
+  const renderContent = (
+    signinContent: string,
+    signupContent: string
+  ): string => {
     return isSignin ? signinContent : signupContent;
+  };
+
+  const handleSignin = async () => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: true,
+    });
+    const res = await signin({
+      email: inputs.email,
+      password: inputs.password,
+    });
+    setAuthState({ ...res });
+    if (res.error === null) {
+      handleClose();
+    }
   };
 
   const submitHandler = () => {
     if (isSignin) {
-      signin({ email: inputs.email, password: inputs.password }, handleClose);
+      handleSignin();
     } else {
+      // ! NEED TO IMPLEMENT LIKE SIGN IN
       signup({ ...inputs }, handleClose);
     }
   };
@@ -73,6 +96,8 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
       }
     } else {
       let isEmpty: boolean = false;
+      // let input: string;
+      // let inputs: AuthModalInputs;
       for (let input in inputs) {
         if (!inputs[input]) {
           isEmpty = true;
@@ -84,15 +109,9 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
   }, [inputs]);
 
   return (
-    <div>
-      <button
-        onClick={handleOpen}
-        className={`${renderContent(
-          "bg-blue-400 text-white",
-          ""
-        )} border p-1 px-4 rounded mr-3`}
-      >
-        {renderContent("Sign in", "Sign out")}
+    <div className="flex">
+      <button onClick={handleOpen} className="text-md p-1 pl-4">
+        {renderContent("Sign in", "Sign up")}
       </button>
 
       <Modal
@@ -102,9 +121,9 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="p-2">
+          <div>
             <div className="m-auto">
-              <h2 className="text-2xl font-light text-center">
+              <h2 className="text-2xl font-light text-center text-red-500 mb-5">
                 {renderContent(
                   "Log Into Your Account",
                   "Create Your Tavolo Account"
@@ -122,7 +141,7 @@ const AuthModel = ({ isSignin }: { isSignin: boolean }) => {
                 </Alert>
               )}
               <button
-                className="uppercase bg-red-600 w-full h-10 text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
+                className="mb-3 bg-red-500 hover:bg-red-600 transition-all mt-3 w-full p-3 text-white disabled:bg-gray-400"
                 disabled={disabled}
                 onClick={submitHandler}
               >

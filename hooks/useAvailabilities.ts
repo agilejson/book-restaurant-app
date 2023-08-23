@@ -20,16 +20,13 @@ const useAvailabilities = () => {
   }) => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/restaurant/${slug}/availability`,
-        {
-          params: {
-            partySize,
-            day,
-            time,
-          },
-        }
-      );
+      const response = await axios.get(`/api/restaurant/${slug}/availability`, {
+        params: {
+          partySize,
+          day,
+          time,
+        },
+      });
       setLoading(false);
       setData(response.data.availabilities);
     } catch (error: any) {

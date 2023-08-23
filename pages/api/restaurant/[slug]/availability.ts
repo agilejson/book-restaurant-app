@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { times } from "../../../../data";
-import { BookingsOnTables, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import findAvailableTables from "../../../../services/restaurant/findAvailableTables";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {

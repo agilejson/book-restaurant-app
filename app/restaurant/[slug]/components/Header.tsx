@@ -1,13 +1,16 @@
-const Header = ({ name }: { name: string }) => {
+const Header = ({ name, mainImage }: { name: string; mainImage: string }) => {
   const renderTitle = () => {
     const nameArray = name.split("-");
     nameArray[nameArray.length - 1] = `(${nameArray[nameArray.length - 1]})`;
     return nameArray.join(" ");
   };
   return (
-    <div className="h-96 overflow-hidden">
-      <div className="bg-center bg-gradient-to-r from-[#0f1f47] to-[#5f6984] h-full flex justify-center items-center">
-        <h1 className="text-7xl text-white capitalize text-shadow text-center">
+    <div
+      className="h-72 bg-cover"
+      style={{ backgroundImage: `url(${mainImage})` }}
+    >
+      <div className="h-full flex justify-center items-center bg-opacity-30 backdrop-filter backdrop-blur-sm">
+        <h1 className="text-6xl font-bold text-white capitalize text-shadow text-center md:text-5xl">
           {renderTitle()}
         </h1>
       </div>

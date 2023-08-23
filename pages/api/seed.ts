@@ -23,9 +23,12 @@ export default async function handler(
     data: [{ name: "ottawa" }, { name: "toronto" }, { name: "niagara" }],
   });
 
+  console.log("Location");
+
   await prisma.cuisine.createMany({
     data: [{ name: "indian" }, { name: "italian" }, { name: "mexican" }],
   });
+  console.log("Cuisine");
 
   const locations = await prisma.location.findMany();
   const cuisines = await prisma.cuisine.findMany();
@@ -164,7 +167,7 @@ export default async function handler(
       {
         name: "Utsav",
         main_image:
-          "https://resizer.otstatic.com/v2/photos/xlarge/1/26646742.jpg",
+          "https://resizer.otstatic.com/v2/photos/xlarge/1/26646761.jpg",
         price: PRICE.CHEAP,
         description:
           "Utsav is an ancient Sanskrit word meaning festival. An integral part of Indian culture, Indian festivals are innumerable and equally varied in origin from the Himalayan foothills to the Peninsula's tip and food plays a very prominent part of the festive events.",
@@ -517,13 +520,15 @@ export default async function handler(
     ],
   });
 
+  console.log("Restaurants");
+
   const restaurants = await prisma.restaurant.findMany();
 
   const vivaanId =
     restaurants.find((restaurant) => restaurant.name === "Vivaan - fine Indian")
       ?.id || 1;
   const RamaKrishnaId =
-    restaurants.find((restaurant) => restaurant.name === "RamaKrishna Indian")
+    restaurants.find((restaurant) => restaurant.name === "Rama Krishna Indian")
       ?.id || 1;
   const coconutLagoonId =
     restaurants.find((restaurant) => restaurant.name === "Coconut Lagoon")
@@ -562,8 +567,28 @@ export default async function handler(
       ?.id || 1;
   const stelvioId =
     restaurants.find((restaurant) => restaurant.name === "Stelvio")?.id || 1;
+
   const sofiaId =
     restaurants.find((restaurant) => restaurant.name === "Sofia")?.id || 1;
+  const casaMaderaId =
+    restaurants.find((restaurant) => restaurant.name === "Casa Madera")?.id ||
+    1;
+  const tacoNTequilaId =
+    restaurants.find((restaurant) => restaurant.name === "Taco N Tequila")
+      ?.id || 1;
+  const elJefeId =
+    restaurants.find((restaurant) => restaurant.name === "El Jefe")?.id || 1;
+  const terroniAdelaideId =
+    restaurants.find((restaurant) => restaurant.name === "Terroni Adelaide")
+      ?.id || 1;
+  const estRestaurantId =
+    restaurants.find((restaurant) => restaurant.name === "EST Restaurant")
+      ?.id || 1;
+  const terroniSudFornoId =
+    restaurants.find((restaurant) => restaurant.name === "Terroni Sud Forno")
+      ?.id || 1;
+  const ilPadrinoId =
+    restaurants.find((restaurant) => restaurant.name === "il Padrino")?.id || 1;
 
   await prisma.item.createMany({
     data: [
@@ -1040,6 +1065,8 @@ export default async function handler(
     ],
   });
 
+  console.log("Items");
+
   const userLaith = await prisma.user.create({
     data: {
       first_name: "Laith",
@@ -1083,6 +1110,8 @@ export default async function handler(
       phone: "1112223333",
     },
   });
+
+  console.log("Users");
 
   await prisma.review.createMany({
     data: [
@@ -1305,6 +1334,8 @@ export default async function handler(
     ],
   });
 
+  console.log("Reviews");
+
   await prisma.table.createMany({
     data: [
       {
@@ -1319,8 +1350,286 @@ export default async function handler(
         restaurant_id: vivaanId,
         seats: 2,
       },
+      {
+        restaurant_id: RamaKrishnaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: RamaKrishnaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: RamaKrishnaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: coconutLagoonId,
+        seats: 4,
+      },
+      {
+        restaurant_id: coconutLagoonId,
+        seats: 4,
+      },
+      {
+        restaurant_id: coconutLagoonId,
+        seats: 2,
+      },
+      {
+        restaurant_id: lastTrainToDelhiId,
+        seats: 4,
+      },
+      {
+        restaurant_id: lastTrainToDelhiId,
+        seats: 4,
+      },
+      {
+        restaurant_id: lastTrainToDelhiId,
+        seats: 2,
+      },
+      {
+        restaurant_id: adrakYorkvilleId,
+        seats: 4,
+      },
+      {
+        restaurant_id: adrakYorkvilleId,
+        seats: 4,
+      },
+      {
+        restaurant_id: adrakYorkvilleId,
+        seats: 2,
+      },
+      {
+        restaurant_id: curryishTavernId,
+        seats: 4,
+      },
+      {
+        restaurant_id: curryishTavernId,
+        seats: 4,
+      },
+      {
+        restaurant_id: curryishTavernId,
+        seats: 2,
+      },
+      {
+        restaurant_id: utsavId,
+        seats: 4,
+      },
+      {
+        restaurant_id: utsavId,
+        seats: 4,
+      },
+      {
+        restaurant_id: utsavId,
+        seats: 2,
+      },
+      {
+        restaurant_id: pukkaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: pukkaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: pukkaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: kamasutraIndianId,
+        seats: 4,
+      },
+      {
+        restaurant_id: kamasutraIndianId,
+        seats: 4,
+      },
+      {
+        restaurant_id: kamasutraIndianId,
+        seats: 2,
+      },
+      {
+        restaurant_id: eldoradoTacoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: eldoradoTacoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: eldoradoTacoId,
+        seats: 2,
+      },
+      {
+        restaurant_id: laBartolaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: laBartolaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: laBartolaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: elCatrinId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elCatrinId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elCatrinId,
+        seats: 2,
+      },
+      {
+        restaurant_id: mariachisId,
+        seats: 4,
+      },
+      {
+        restaurant_id: mariachisId,
+        seats: 4,
+      },
+      {
+        restaurant_id: mariachisId,
+        seats: 2,
+      },
+      {
+        restaurant_id: canoRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: canoRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: canoRestaurantId,
+        seats: 2,
+      },
+      {
+        restaurant_id: bluRistoranteId,
+        seats: 4,
+      },
+      {
+        restaurant_id: bluRistoranteId,
+        seats: 4,
+      },
+      {
+        restaurant_id: bluRistoranteId,
+        seats: 2,
+      },
+      {
+        restaurant_id: stelvioId,
+        seats: 4,
+      },
+      {
+        restaurant_id: stelvioId,
+        seats: 4,
+      },
+      {
+        restaurant_id: stelvioId,
+        seats: 2,
+      },
+      {
+        restaurant_id: sofiaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: sofiaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: sofiaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: casaMaderaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: casaMaderaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: casaMaderaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: tacoNTequilaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: tacoNTequilaId,
+        seats: 4,
+      },
+      {
+        restaurant_id: tacoNTequilaId,
+        seats: 2,
+      },
+      {
+        restaurant_id: elJefeId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elJefeId,
+        seats: 4,
+      },
+      {
+        restaurant_id: elJefeId,
+        seats: 2,
+      },
+      {
+        restaurant_id: terroniAdelaideId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniAdelaideId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniAdelaideId,
+        seats: 2,
+      },
+      {
+        restaurant_id: estRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: estRestaurantId,
+        seats: 4,
+      },
+      {
+        restaurant_id: estRestaurantId,
+        seats: 2,
+      },
+      {
+        restaurant_id: terroniSudFornoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniSudFornoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: terroniSudFornoId,
+        seats: 2,
+      },
+      {
+        restaurant_id: ilPadrinoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: ilPadrinoId,
+        seats: 4,
+      },
+      {
+        restaurant_id: ilPadrinoId,
+        seats: 2,
+      },
     ],
   });
+
+  console.log("Tables");
 
   res.status(200).json({ name: "hello" });
 }

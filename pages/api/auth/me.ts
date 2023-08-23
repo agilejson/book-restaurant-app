@@ -22,7 +22,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     // * FETCH USER FROM DB
-
     interface UserType {
       id: number;
       first_name: string;
@@ -56,8 +55,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(200).json({
       id: user.id,
-      firstName: user.first_name,
-      lastName: user.last_name,
+      first_name: user.first_name,
+      last_name: user.last_name,
       email: user.email,
       phone: user.phone,
       city: user.city,

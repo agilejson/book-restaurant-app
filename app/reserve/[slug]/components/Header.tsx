@@ -16,16 +16,21 @@ const Header = ({
   partySize: string;
 }) => {
   const [day, time] = bookingDate.split("T");
-  console.log(day, time);
   return (
-    <div>
-      <h3 className="font-bold">You're almost done!</h3>
-      <div className="mt-5 flex">
-        <img src={mainImage} alt="" className="w-32 h-18 rounded" />
-        <div className="ml-4">
-          <h1 className="text-3xl font-bold">{restaurantName}</h1>
-          <div className="flex mt-3">
-            <p className="mr-6">
+    <div className="">
+      <h4 className="text-red-500 xsm:text-center">You're almost done!</h4>
+      <div className="mt-5 flex sm:flex-col ">
+        <img
+          src={mainImage}
+          alt=""
+          className="w-32 h-auto rounded xsm:w-[80%] xsm:mx-auto "
+        />
+        <div className="ml-4 sm:ml-0">
+          <h1 className="text-4xl xsm:mt-2 xsm:text-center">
+            {restaurantName}
+          </h1>
+          <div className="flex mt-3 xsm:w-fit xsm:mx-auto">
+            <p className="mr-6 ">
               {format(new Date(bookingDate), "ccc, LLL d")}
             </p>
             <p className="mr-6">{convertToDisplayTime(time as Time)}</p>
